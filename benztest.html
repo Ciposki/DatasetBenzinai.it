@@ -1,0 +1,291 @@
+<html>
+    <head>
+        <style>
+            html {
+            box-sizing: border-box;
+            font-size: 16px;
+            }
+
+            *, *:before, *:after {
+            box-sizing: inherit;
+            }
+
+            body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+            margin: 0;
+            padding: 0;
+            }
+            .benzgroup{
+                display: flex;
+                flex-direction: column;
+                gap: 0.5vw;
+            }
+            .benzinaio{
+                opacity: 0;
+                display: flex;
+                flex-direction: row;
+                border: red 1px solid;
+            }
+            .info{
+                border: red 1px solid;
+                width: 40vw;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5vw;
+                
+            }
+            .prezzi{
+                display: flex;
+
+            }
+            table {
+            border-collapse: collapse;
+            width: 100%;
+            }
+            th, td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid black;
+            width: 4vw;
+            }
+
+        </style>
+    </head>
+    <body>
+        <select name="" id="reg">
+            <option value="0">---Seleziona---</option>
+            <option value="2">Abruzzo</option>
+            <option value="3">Basilicata</option>
+            <option value="7">Calabria</option>
+            <option value="8">Campania</option>
+            <option value="14">Emilia Romagna</option>
+            <option value="15">Friuli Venezia Giulia</option>
+            <option value="9">Lazio</option>
+            <option value="18">Liguria</option>
+            <option value="19">Lombardia</option>
+            <option value="1">Marche</option>
+            <option value="4">Molise</option>
+            <option value="13">Piemonte</option>
+            <option value="6">Puglia</option>
+            <option value="10">Sardegna</option>
+            <option value="11">Sicilia</option>
+            <option value="12">Toscana</option>
+            <option value="5">Trentino Alto Adige</option>
+            <option value="20">Umbria</option>
+            <option value="16">Valle d'Aosta</option>
+            <option value="17">Veneto</option>
+        </select>
+        <select name="" id="prov">
+            <option value="0">---Seleziona---</option>
+        </select>
+        <select name="" id="citt"><option value="0">---Seleziona---</option></select>
+        <div class="benzgroup">
+            <div class="benzinaio">
+                <div class="info">
+                    <h1 class="name">NaN</h1>
+                    <h2 class="brand">NaN</h2>
+                    <h2 class="address">NaN</h2>
+                    <h2 class="vald">NaN</h2>
+                </div>
+                <div class="prezzi">
+                    <table class="tab">
+                        <tr>
+                            <td>Carburante</td>
+                            <td>Servizio</td>
+                            <td>Prezzo</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="benzinaio">
+                <div class="info">
+                    <h1 class="name">NaN</h1>
+                    <h2 class="brand">NaN</h2>
+                    <h2 class="address">NaN</h2>
+                    <h2 class="vald">NaN</h2>
+                </div>
+                <div class="prezzi">
+                    <table class="tab">
+                        <tr>
+                            <td>Carburante</td>
+                            <td>Servizio</td>
+                            <td>Prezzo</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="benzinaio">
+                <div class="info">
+                    <h1 class="name">NaN</h1>
+                    <h2 class="brand">NaN</h2>
+                    <h2 class="address">NaN</h2>
+                    <h2 class="vald">NaN</h2>
+                </div>
+                <div class="prezzi">
+                    <table class="tab">
+                        <tr>
+                            <td>Carburante</td>
+                            <td>Servizio</td>
+                            <td>Prezzo</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="benzinaio">
+                <div class="info">
+                    <h1 class="name">NaN</h1>
+                    <h2 class="brand">NaN</h2>
+                    <h2 class="address">NaN</h2>
+                    <h2 class="vald">NaN</h2>
+                </div>
+                <div class="prezzi">
+                    <table class="tab">
+                        <tr>
+                            <td>Carburante</td>
+                            <td>Servizio</td>
+                            <td>Prezzo</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="benzinaio">
+                <div class="info">
+                    <h1 class="name">NaN</h1>
+                    <h2 class="brand">NaN</h2>
+                    <h2 class="address">NaN</h2>
+                    <h2 class="vald">NaN</h2>
+                </div>
+                <div class="prezzi">
+                    <table class="tab">
+                        <tr>
+                            <td>Carburante</td>
+                            <td>Servizio</td>
+                            <td>Prezzo</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        
+        <p id="benzcod"></p>
+    </body>
+    
+    <script>
+        const reg=document.getElementById("reg");
+        const prov=document.getElementById("prov");
+        const citt = document.getElementById("citt");
+        const benz = document.getElementById("benzcod");
+        const benzcard = document.querySelectorAll(".benzinaio");
+        const nome= document.querySelectorAll(".name");
+        const brand = document.querySelectorAll(".brand")
+        const address = document.querySelectorAll(".address");
+        const val = document.querySelectorAll(".vald");
+        const tab = document.querySelectorAll(".tab");
+        var benzinai =[];
+        reg.onchange = (event) => {
+            if(inputText !="0"){
+            while(prov.length>1){
+                prov.remove(1)
+            }
+            while(citt.length>1){
+                citt.remove(1)
+            }
+            var inputText = event.target.value;
+            console.log(inputText);
+            getData("https://carburanti.mise.gov.it/ospzApi/registry/province?regionId="+inputText).then(function(data){
+                for(let i = 0;i<data.results.length;i++){
+                    var opt1 = document.createElement("option");
+                    opt1.value = data.results[i].id;
+                    opt1.text = data.results[i].description;
+                    prov.add(opt1);
+                }
+            })
+        }
+        }
+        prov.onchange = (event) => {
+            var inputText = event.target.value;
+            if(inputText !="0"){
+            while(citt.length>1){
+                citt.remove(1)
+            }
+            
+            console.log(inputText);
+            getData("https://carburanti.mise.gov.it/ospzApi/registry/town?province="+inputText).then(function(data){
+                for(let i = 0;i<data.results.length;i++){
+                    var opt1 = document.createElement("option");
+                    opt1.value = data.results[i].id;
+                    opt1.text = data.results[i].description;
+                    citt.add(opt1);
+                }
+            })
+        }
+        }
+        
+        citt.onchange = (event) => {
+            benz.textContent="";
+            var inputText = event.target.value.toUpperCase();
+            if(inputText !="0"){
+            console.log(inputText);
+            getData("https://ciposki.github.io/DatasetBenzinai.it/databaseBenzinai.json").then(function(data){
+                benzinai = [];
+                if(data[inputText] !=undefined){
+                    for(let i = 0;i<data[inputText].length;i++){
+                        benzinai.push(data[inputText][i])
+                    }
+                    for(let i=0; i< benzcard.length;i++){
+                        if(i<benzinai.length){
+                            getData("https://carburanti.mise.gov.it/ospzApi/registry/servicearea/"+benzinai[i]).then(function(data){
+                                nome[i].textContent = data.nomeImpianto;
+                                brand[i].textContent = data.brand;
+                                address[i].textContent = data.address;
+                                benzcard[i].style.opacity = "1";
+                                while(tab[i].rows.length>1){
+                                    tab[i].deleteRow(-1);
+                                }
+                                for(let f = 0; f<data.fuels.length;f++){
+                                    var row = tab[i].insertRow(-1);
+                                    var cell1 = row.insertCell(0);
+                                    var cell2 = row.insertCell(1);
+                                    var cell3 = row.insertCell(2);
+                                    cell1.textContent = data.fuels[f].name;
+                                    if(data.fuels[f].isSelf == true ){
+                                    cell2.textContent="Self";
+                                    }else{
+                                        cell2.textContent =  "Servito";
+                                    }
+                                    cell3.textContent = data.fuels[f].price;
+                                }
+        
+                                
+                            })
+                            
+                        }
+                    }
+                    if(benzinai.length >5){
+                        var buttone = document.createElement("BUTTON")
+                        document.body.appendChild(buttone);
+                    }
+                    console.log(benzinai);
+                }else{
+                    benz.textContent = "Nessun Benzinaio Trovato";
+                }    
+            })
+        }
+        }
+
+        async function getData(url){
+            try{
+                const response = await fetch("https://api.codetabs.com/v1/proxy/?quest="+url);
+                if(!response.ok){
+                    throw new Error("Could not fetch data");
+                }
+                const data = await response.json();
+                return data;
+            }
+            catch(error){
+                console.error(error);
+            }
+        }
+        
+    </script>
+</html>
