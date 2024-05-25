@@ -223,6 +223,9 @@
         
         citt.onchange = (event) => {
             benz.textContent="";
+            for(let i =0;i<benzcard.length;i++){
+                benzcard[i].style.opacity = "0";
+                }
             var inputText = event.target.value.toUpperCase();
             if(inputText !="0"){
             console.log(inputText);
