@@ -47,6 +47,15 @@
             border: 1px solid black;
             width: 4vw;
             }
+            .imgname{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+            .imgname img{
+                width: 5vw;
+                height: 5vw;
+            }
 
         </style>
     </head>
@@ -81,7 +90,11 @@
         <div class="benzgroup">
             <div class="benzinaio">
                 <div class="info">
-                    <h1 class="name">NaN</h1>
+                    <div class="imgname">
+                        <img src="" alt="">
+                        <h1 class="name">NaN</h1>
+                    </div>
+                    
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
                     <h2 class="vald">NaN</h2>
@@ -98,7 +111,11 @@
             </div>
             <div class="benzinaio">
                 <div class="info">
-                    <h1 class="name">NaN</h1>
+                    <div class="imgname">
+                        <img src="" alt="">
+                        <h1 class="name">NaN</h1>
+                    </div>
+                    
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
                     <h2 class="vald">NaN</h2>
@@ -115,7 +132,11 @@
             </div>
             <div class="benzinaio">
                 <div class="info">
-                    <h1 class="name">NaN</h1>
+                    <div class="imgname">
+                        <img src="" alt="">
+                        <h1 class="name">NaN</h1>
+                    </div>
+                    
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
                     <h2 class="vald">NaN</h2>
@@ -132,7 +153,11 @@
             </div>
             <div class="benzinaio">
                 <div class="info">
-                    <h1 class="name">NaN</h1>
+                    <div class="imgname">
+                        <img src="" alt="">
+                        <h1 class="name">NaN</h1>
+                    </div>
+                    
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
                     <h2 class="vald">NaN</h2>
@@ -149,7 +174,11 @@
             </div>
             <div class="benzinaio">
                 <div class="info">
-                    <h1 class="name">NaN</h1>
+                    <div class="imgname">
+                        <img src="" alt="">
+                        <h1 class="name">NaN</h1>
+                    </div>
+                    
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
                     <h2 class="vald">NaN</h2>
@@ -181,6 +210,7 @@
         const address = document.querySelectorAll(".address");
         const val = document.querySelectorAll(".vald");
         const tab = document.querySelectorAll(".tab");
+        const img = document.querySelectorAll("img")
         var benzinai =[];
         reg.onchange = (event) => {
             if(inputText !="0"){
@@ -240,6 +270,22 @@
                             getData("https://carburanti.mise.gov.it/ospzApi/registry/servicearea/"+benzinai[i]).then(function(data){
                                 nome[i].textContent = data.nomeImpianto;
                                 brand[i].textContent = data.brand;
+                                if(data.brand == "Esso"){
+                                    img[i].src = "https://seeklogo.com/images/E/Esso-logo-073F2C0D97-seeklogo.com.png";
+                                }else if(data.brand =="Q8"){
+                                    img[i].src = "https://cdn.worldvectorlogo.com/logos/q8-4.svg";
+                                }else if(data.brand =="AgipEni"){
+                                    img[i].src = "https://www.logo.wine/a/logo/Eni/Eni-Logo.wine.svg";
+                                }else if(data.brand =="Shell"){
+                                    img[i].src = "https://cdn.freebiesupply.com/logos/large/2x/shell-logo-png-transparent.png";
+                                }else if(data.brand =="Api-Ip"){
+                                    img[i].src = "https://seeklogo.com/images/I/IP-logo-29FAFECF90-seeklogo.com.png";
+                                }else if(data.brand =="Api-Ip"){
+                                    img[i].src = "https://seeklogo.com/images/I/IP-logo-29FAFECF90-seeklogo.com.png";
+                                }
+                                else{
+                                    img[i].src = "https://cdn-icons-png.flaticon.com/512/99/99729.png";
+                                }
                                 address[i].textContent = data.address;
                                 benzcard[i].style.opacity = "1";
                                 while(tab[i].rows.length>1){
