@@ -20,13 +20,13 @@
                 gap: 0.5vw;
             }
             .benzinaio{
-                opacity: 0;
-                display: flex;
+                display: none;
                 flex-direction: row;
-                border: red 1px solid;
+                height: 20vh;
+                margin: 0.5vw;
             }
             .info{
-                border: red 1px solid;
+
                 width: 60vw;
                 display: flex;
                 flex-direction: column;
@@ -35,7 +35,9 @@
             }
             .prezzi{
                 display: flex;
-
+                overflow-y: auto;
+                overflow-x:hidden;
+                width: 40vw;
             }
             table {
             border-collapse: collapse;
@@ -58,10 +60,17 @@
                 height: 5vw;
             }
 
+            .page{
+                display: flex;
+                flex-direction: row;
+                gap: 0.5vw;
+                margin: 2vw;
+            }
+
         </style>
     </head>
     <body>
-        <select name="" id="reg">
+        <select name="Regione" id="reg">
             <option value="0">---Seleziona---</option>
             <option value="2">Abruzzo</option>
             <option value="3">Basilicata</option>
@@ -98,7 +107,6 @@
                     
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
-                    <h2 class="vald">NaN</h2>
                 </div>
                 <div class="prezzi">
                     <table class="tab">
@@ -119,7 +127,6 @@
                     
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
-                    <h2 class="vald">NaN</h2>
                 </div>
                 <div class="prezzi">
                     <table class="tab">
@@ -140,7 +147,6 @@
                     
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
-                    <h2 class="vald">NaN</h2>
                 </div>
                 <div class="prezzi">
                     <table class="tab">
@@ -161,7 +167,6 @@
                     
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
-                    <h2 class="vald">NaN</h2>
                 </div>
                 <div class="prezzi">
                     <table class="tab">
@@ -182,7 +187,6 @@
                     
                     <h2 class="brand">NaN</h2>
                     <h2 class="address">NaN</h2>
-                    <h2 class="vald">NaN</h2>
                 </div>
                 <div class="prezzi">
                     <table class="tab">
@@ -278,10 +282,15 @@
                     benzload =true;
                     if(benzinai.length>5){
                         maxindx = Math.round(benzinai.length/5) ;
-                    }else{maxindx=0}
+                    }else{
+                        maxindx=0
+                    }
                     
                     console.log(benzinai);
                 }else{
+                    for(let i =0;i<benzcard.length;i++){
+                        benzcard[i].style.display = "none";
+                    }
                     benz.textContent = "Nessun Benzinaio Trovato";
                 }    
             })
@@ -290,7 +299,7 @@
 
         function load(pageindx){
             for(let i =0;i<benzcard.length;i++){
-                benzcard[i].style.opacity = "0";
+                benzcard[i].style.display = "none";
                 }
             for(let i=0; i< benzcard.length;i++){
                 let page = i+(5*pageindx);
@@ -317,7 +326,7 @@
                                 }
                                 console.log(data.nomeImpianto);
                                 address[i].textContent = data.address;
-                                benzcard[i].style.opacity = "1";
+                                benzcard[i].style.display = "flex";
                                 while(tab[i].rows.length>1){
                                     tab[i].deleteRow(-1);
                                 }
