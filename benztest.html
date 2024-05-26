@@ -27,7 +27,7 @@
             }
             .info{
                 border: red 1px solid;
-                width: 40vw;
+                width: 60vw;
                 display: flex;
                 flex-direction: column;
                 gap: 0.5vw;
@@ -51,6 +51,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                gap: 0.5vw;
             }
             .imgname img{
                 width: 5vw;
@@ -195,7 +196,11 @@
             </div>
         </div>
         
-        
+        <div class="page">
+            <button onclick="prevPage()">indietro</button>
+            <h3 class="indx">0</h3>
+            <button onclick="nextPage()">avanti</button>
+        </div>
         <p id="benzcod"></p>
     </body>
     
@@ -210,8 +215,12 @@
         const address = document.querySelectorAll(".address");
         const val = document.querySelectorAll(".vald");
         const tab = document.querySelectorAll(".tab");
-        const img = document.querySelectorAll("img")
+        const img = document.querySelectorAll("img");
+        const indx = document.querySelector(".indx");
+        var currindx =0;
+        var maxindx =0;
         var benzinai =[];
+        var benzload= false;
         reg.onchange = (event) => {
             if(inputText !="0"){
             while(prov.length>1){
@@ -252,10 +261,10 @@
         }
         
         citt.onchange = (event) => {
+            var currindx =0;
+            indx.textContent =currindx;
+            benzload =false;
             benz.textContent="";
-            for(let i =0;i<benzcard.length;i++){
-                benzcard[i].style.opacity = "0";
-                }
             var inputText = event.target.value.toUpperCase();
             if(inputText !="0"){
             console.log(inputText);
@@ -265,9 +274,26 @@
                     for(let i = 0;i<data[inputText].length;i++){
                         benzinai.push(data[inputText][i])
                     }
-                    for(let i=0; i< benzcard.length;i++){
-                        if(i<benzinai.length){
-                            getData("https://carburanti.mise.gov.it/ospzApi/registry/servicearea/"+benzinai[i]).then(function(data){
+                    load(currindx);
+                    benzload =true;
+                    maxindx = Math.round(benzinai.length/5) ;
+                    console.log(benzinai);
+                }else{
+                    benz.textContent = "Nessun Benzinaio Trovato";
+                }    
+            })
+        }
+        }
+
+        function load(pageindx){
+            for(let i =0;i<benzcard.length;i++){
+                benzcard[i].style.opacity = "0";
+                }
+            for(let i=0; i< benzcard.length;i++){
+                let page = i+(5*pageindx);
+                        if(page<benzinai.length){
+                            
+                            getData("https://carburanti.mise.gov.it/ospzApi/registry/servicearea/"+benzinai[page]).then(function(data){
                                 nome[i].textContent = data.nomeImpianto;
                                 brand[i].textContent = data.brand;
                                 if(data.brand == "Esso"){
@@ -286,6 +312,7 @@
                                 else{
                                     img[i].src = "https://cdn-icons-png.flaticon.com/512/99/99729.png";
                                 }
+                                console.log(data.nomeImpianto);
                                 address[i].textContent = data.address;
                                 benzcard[i].style.opacity = "1";
                                 while(tab[i].rows.length>1){
@@ -310,18 +337,27 @@
                             
                         }
                     }
-                    if(benzinai.length >5){
-                        var buttone = document.createElement("BUTTON")
-                        document.body.appendChild(buttone);
-                    }
-                    console.log(benzinai);
-                }else{
-                    benz.textContent = "Nessun Benzinaio Trovato";
-                }    
-            })
-        }
         }
 
+        function nextPage(){
+            if(benzload&& currindx<maxindx){
+                currindx = currindx+1;
+                load(currindx);
+                
+                console.log(currindx)
+                indx.textContent =currindx;
+            }
+            
+        }
+        function prevPage(){
+            if(benzload && currindx>0){
+                currindx = currindx-1;
+                load(currindx)
+                
+                indx.textContent =currindx;
+            }
+            
+        }
         async function getData(url){
             try{
                 const response = await fetch("https://api.codetabs.com/v1/proxy/?quest="+url);
