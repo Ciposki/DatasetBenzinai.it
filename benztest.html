@@ -276,7 +276,10 @@
                     }
                     load(currindx);
                     benzload =true;
-                    maxindx = Math.round(benzinai.length/5) ;
+                    if(benzinai.length>5){
+                        maxindx = Math.round(benzinai.length/5) ;
+                    }else{maxindx=0}
+                    
                     console.log(benzinai);
                 }else{
                     benz.textContent = "Nessun Benzinaio Trovato";
@@ -343,8 +346,6 @@
             if(benzload&& currindx<maxindx){
                 currindx = currindx+1;
                 load(currindx);
-                
-                console.log(currindx)
                 indx.textContent =currindx;
             }
             
